@@ -1,16 +1,41 @@
-# news_app
+# News-App-flutter
+ News Apps which shows the trending news headlines using the NewsAPI . You can send a PR and get your progress in the hacktoberfest .🤞
 
-A new Flutter application.
 
-## Getting Started
+# Screenshot
+<img src="https://github.com/sainiteshb/NASA-Apod-flutter/blob/main/screenshots/Screenshot_1601990197.png" width="260px" height="440px" >  <img src="https://github.com/sainiteshb/NASA-Apod-flutter/blob/main/screenshots/Screenshot_1601990200.png" width="260px" height="440px" >
 
-This project is a starting point for a Flutter application.
+# Download & Install
+First, clone the repository with the 'clone' command, or just download the zip.
+```C
+$ git clone git@github.com:sainiteshb/News-App-Flutter.git
+```
+Then, download either Android Studio or Visual Studio Code, with their respective Flutter editor plugins.
 
-A few resources to get you started if this is your first Flutter project:
+Install dependencies from pubspec.yaml by running flutter ``` packages get ``` from the project root .
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+ Get your apikey from here for free [Official News API](https://newsapi.org/) and Change it in the ```news.dart``` file or use the default key available .👍
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+There you go, you can now open & edit the project. Enjoy!
+
+# Packages Used
+
+* [http:](https://pub.dev/packages/http)  Http requests
+* [shimmer:](https://pub.dev/packages/shimmer)  Shimmer effect
+* [google_fonts:](https://pub.dev/packages/google_fonts) Google fonts
+* [provider:](https://pub.dev/packages/provider) Provider for theme
+* [font_awesome_flutter:](https://pub.dev/packages/font_awesome_flutter) Font Awesome Icons
+* [webview_flutter:](https://pub.dev/packages/webview_flutter) Web View
+
+
+# Contribute  to the Project  🎉
+
+Fork and add new features and send a pull request . 
+
+Some ideas to contribute
+* caching the http response to reduce the API calls.
+* Ui improvements or animations. 
+Or anything , Your choice .
+
+
+Happy Hacktoberfest !😉
