@@ -3,7 +3,7 @@
 
 
 # Screenshot
-<img src="https://github.com/sainiteshb/NASA-Apod-flutter/blob/main/screenshots/Screenshot_1601990197.png" width="260px" height="440px" >  <img src="https://github.com/sainiteshb/NASA-Apod-flutter/blob/main/screenshots/Screenshot_1601990200.png" width="260px" height="440px" >
+<img src="https://github.com/sainiteshb/News-App-Flutter/blob/main/screenshots/Screenshot_1602157150.png" width="260px" height="440px" >  <img src="https://github.com/sainiteshb/NASA-Apod-flutter/blob/main/screenshots/Screenshot_1601990200.png" width="260px" height="440px" >
 
 # Download & Install
 First, clone the repository with the 'clone' command, or just download the zip.
