@@ -35,7 +35,7 @@ Fork and add new features and send a pull request .
 Some ideas to contribute
 * caching the http response to reduce the API calls.
 * Ui improvements or animations. 
-Or anything , Your choice .
+Or anything , Your choice .<br>
 Note: No typo fixes please !
 
 Happy Hacktoberfest !😉
