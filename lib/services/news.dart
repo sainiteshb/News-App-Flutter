@@ -6,7 +6,7 @@ import '../views/news_article_page.dart';
 import 'news_model.dart';
 import 'package:http/http.dart' as http;
 
-String apiKey = "dd07503a09c44a9f897a16d3d8251ef1";
+String apiKey = "2c3e1343e7234f6b99576d22605f5be2";
 
 class News {
   List<Article> news = [];
