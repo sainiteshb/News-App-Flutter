@@ -36,6 +36,6 @@ Some ideas to contribute
 * caching the http response to reduce the API calls.
 * Ui improvements or animations. 
 Or anything , Your choice .
-
+Note: No typo fixes please !
 
 Happy Hacktoberfest !😉
