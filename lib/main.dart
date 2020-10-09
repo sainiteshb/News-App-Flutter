@@ -9,6 +9,9 @@ void main() {
   ], child: MyApp()));
 }
 
+
+// Change the API key in the news.dart file to have more APi calls , since this key is already in use . Also maybe slow.
+
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
