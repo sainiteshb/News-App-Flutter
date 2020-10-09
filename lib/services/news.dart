@@ -6,6 +6,8 @@ import '../views/news_article_page.dart';
 import 'news_model.dart';
 import 'package:http/http.dart' as http;
 
+
+// Change the apiKey to get more Api calls since its been in use .
 String apiKey = "2c3e1343e7234f6b99576d22605f5be2";
 
 class News {
