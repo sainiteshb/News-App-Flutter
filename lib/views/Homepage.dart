@@ -5,6 +5,7 @@ import 'package:news_app/widgets.dart';
 import 'package:provider/provider.dart';
 import '../services/theme.dart';
 import '../services/news.dart';
+import 'package:flutter_fadein/flutter_fadein.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -127,12 +128,16 @@ class _HomePageState extends State<HomePage> {
                           shrinkWrap: true,
                           physics: ClampingScrollPhysics(),
                           itemBuilder: (context, index) {
-                            return NewsTile(
+                            return FadeIn(
+                              child:NewsTile(
                               imgUrl: newslist[index].urlToImage ?? "",
                               title: newslist[index].title ?? "",
                               desc: newslist[index].description ?? "",
                               content: newslist[index].content ?? "",
                               posturl: newslist[index].articleUrl ?? "",
+                            ),
+                            duration: Duration(milliseconds: 250),
+                            curve: Curves.easeIn
                             );
                           }),
                     ),
