@@ -13,8 +13,9 @@ class News {
   Future<List<Article>> getNews() async {
     List<Article> news = [];
 
+
     String url =
-        "http://newsapi.org/v2/top-headlines?country=us&category=business&apiKey=${apiKey}";
+        "http://newsapi.org/v2/top-headlines?country=us&category=business&apiKey=$apiKey";
 
     var response = await http.get(url);
 
@@ -35,6 +36,7 @@ class News {
           news.add(article);
         }
       });
+      notifyListeners();
     }
     return news;
   }
