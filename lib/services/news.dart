@@ -6,14 +6,13 @@ import '../views/news_article_page.dart';
 import 'news_model.dart';
 import 'package:http/http.dart' as http;
 
-
 // Change the apiKey to get more Api calls since its been in use .
-String apiKey = "2c3e1343e7234f6b99576d22605f5be2";
+final String apiKey = "2c3e1343e7234f6b99576d22605f5be2";
 
 class News {
-  List<Article> news = [];
+  Future<List<Article>> getNews() async {
+    List<Article> news = [];
 
-  Future<void> getNews() async {
     String url =
         "http://newsapi.org/v2/top-headlines?country=us&category=business&apiKey=${apiKey}";
 
@@ -37,6 +36,7 @@ class News {
         }
       });
     }
+    return news;
   }
 }
 
@@ -61,51 +61,49 @@ class NewsTile extends StatelessWidget {
                       postUrl: posturl,
                     )));
       },
-      child: Container(
-          margin: EdgeInsets.only(bottom: 24),
-          width: MediaQuery.of(context).size.width,
-          child: Container(
-            child: Container(
-              padding: EdgeInsets.symmetric(horizontal: 16),
-              alignment: Alignment.bottomCenter,
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.only(
-                      bottomRight: Radius.circular(6),
-                      bottomLeft: Radius.circular(6))),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisSize: MainAxisSize.min,
-                children: <Widget>[
-                  ClipRRect(
-                      borderRadius: BorderRadius.circular(6),
-                      child: Image.network(
-                        imgUrl,
-                        height: 180,
-                        width: MediaQuery.of(context).size.width,
-                        fit: BoxFit.cover,
-                      )),
-                  SizedBox(
-                    height: 12,
-                  ),
-                  Text(
-                    title,
-                    maxLines: 2,
-                    style: GoogleFonts.poppins(
-                        textStyle: TextStyle(
-                            fontSize: 19, fontWeight: FontWeight.w500)),
-                  ),
-                  SizedBox(
-                    height: 4,
-                  ),
-                  Text(
-                    desc,
-                    maxLines: 2,
-                    style: TextStyle(fontSize: 14, color: Colors.grey),
-                  )
-                ],
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Container(
+          padding: EdgeInsets.symmetric(horizontal: 16),
+          alignment: Alignment.bottomCenter,
+          decoration: BoxDecoration(
+              borderRadius: BorderRadius.only(
+                  bottomRight: Radius.circular(6),
+                  bottomLeft: Radius.circular(6))),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisSize: MainAxisSize.min,
+            children: <Widget>[
+              ClipRRect(
+                  borderRadius: BorderRadius.circular(6),
+                  child: Image.network(
+                    imgUrl,
+                    height: 180,
+                    width: MediaQuery.of(context).size.width,
+                    fit: BoxFit.cover,
+                  )),
+              SizedBox(
+                height: 12,
               ),
-            ),
-          )),
+              Text(
+                title,
+                maxLines: 2,
+                style: GoogleFonts.poppins(
+                    textStyle:
+                        TextStyle(fontSize: 19, fontWeight: FontWeight.w500)),
+              ),
+              SizedBox(
+                height: 4,
+              ),
+              Text(
+                desc,
+                maxLines: 2,
+                style: TextStyle(fontSize: 14, color: Colors.grey),
+              )
+            ],
+          ),
+        ),
+      ),
     );
   }
 }

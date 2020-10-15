@@ -13,22 +13,11 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  var newslist;
-  bool _loading;
-
-  void getNews() async {
-    News news = News();
-    await news.getNews();
-    newslist = news.news;
-    setState(() {
-      _loading = false;
-    });
-  }
+  News news;
 
   @override
   void initState() {
-    getNews();
-    _loading = true;
+    news = News();
     super.initState();
   }
 
@@ -72,56 +61,12 @@ class _HomePageState extends State<HomePage> {
                   ),
                 ),
               ),
-              _loading
-                  ? SingleChildScrollView(
-                      child: Column(
-                        children: [
-                          Container(
-                            width: MediaQuery.of(context).size.width,
-                            padding: EdgeInsets.symmetric(
-                                vertical: 10.0, horizontal: 10.0),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                shimmerWidget(
-                                    200.0, MediaQuery.of(context).size.width),
-                                SizedBox(
-                                  height: 8.0,
-                                ),
-                                shimmerLine(MediaQuery.of(context).size.width),
-                                SizedBox(
-                                  height: 10.0,
-                                ),
-                                shimmerLine(
-                                    MediaQuery.of(context).size.width * 0.5)
-                              ],
-                            ),
-                          ),
-                          Container(
-                            width: MediaQuery.of(context).size.width,
-                            padding: EdgeInsets.symmetric(
-                                vertical: 10.0, horizontal: 10.0),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                shimmerWidget(
-                                    200.0, MediaQuery.of(context).size.width),
-                                SizedBox(
-                                  height: 8.0,
-                                ),
-                                shimmerLine(MediaQuery.of(context).size.width),
-                                SizedBox(
-                                  height: 10.0,
-                                ),
-                                shimmerLine(
-                                    MediaQuery.of(context).size.width * 0.5)
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
-                    )
-                  : Container(
+              FutureBuilder(
+                future: news.getNews(),
+                builder: (context, snapshot) {
+                  if (snapshot.hasData) {
+                    final newslist = snapshot.data;
+                    return Container(
                       margin: EdgeInsets.only(top: 16),
                       child: ListView.builder(
                           itemCount: newslist.length,
@@ -129,18 +74,76 @@ class _HomePageState extends State<HomePage> {
                           physics: ClampingScrollPhysics(),
                           itemBuilder: (context, index) {
                             return FadeIn(
-                              child:NewsTile(
-                              imgUrl: newslist[index].urlToImage ?? "",
-                              title: newslist[index].title ?? "",
-                              desc: newslist[index].description ?? "",
-                              content: newslist[index].content ?? "",
-                              posturl: newslist[index].articleUrl ?? "",
-                            ),
-                            duration: Duration(milliseconds: 250),
-                            curve: Curves.easeIn
-                            );
+                                child: NewsTile(
+                                  imgUrl: newslist[index].urlToImage ?? "",
+                                  title: newslist[index].title ?? "",
+                                  desc: newslist[index].description ?? "",
+                                  content: newslist[index].content ?? "",
+                                  posturl: newslist[index].articleUrl ?? "",
+                                ),
+                                duration: Duration(milliseconds: 250),
+                                curve: Curves.easeIn);
                           }),
+                    );
+                  } else if (snapshot.hasError) {
+                    return Center(
+                      child: Text("There was some error"),
+                    );
+                  }
+
+                  return SingleChildScrollView(
+                    child: Column(
+                      children: [
+                        Container(
+                          width: MediaQuery.of(context).size.width,
+                          padding: EdgeInsets.symmetric(
+                              vertical: 10.0, horizontal: 10.0),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              shimmerWidget(
+                                  200.0, MediaQuery.of(context).size.width),
+                              SizedBox(
+                                height: 8.0,
+                              ),
+                              shimmerLine(MediaQuery.of(context).size.width),
+                              SizedBox(
+                                height: 10.0,
+                              ),
+                              shimmerLine(
+                                  MediaQuery.of(context).size.width * 0.5)
+                            ],
+                          ),
+                        ),
+                        Container(
+                          width: MediaQuery.of(context).size.width,
+                          padding: EdgeInsets.symmetric(
+                              vertical: 10.0, horizontal: 10.0),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              shimmerWidget(
+                                  200.0, MediaQuery.of(context).size.width),
+                              SizedBox(
+                                height: 8.0,
+                              ),
+                              shimmerLine(MediaQuery.of(context).size.width),
+                              SizedBox(
+                                height: 10.0,
+                              ),
+                              shimmerLine(
+                                  MediaQuery.of(context).size.width * 0.5)
+                            ],
+                          ),
+                        ),
+                      ],
                     ),
+                  );
+                },
+              ),
+              // _loading
+              //     ?
+              //     : null
             ],
           ),
         ),
