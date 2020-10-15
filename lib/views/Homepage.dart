@@ -12,28 +12,17 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  var newslist;
-  bool _loading;
-
-  void getNews() async {
-    News news = News();
-    await news.getNews();
-    newslist = news.news;
-    setState(() {
-      _loading = false;
-    });
-  }
 
   @override
   void initState() {
-    getNews();
-    _loading = true;
+    Provider.of<NewsNotifier>(context).getNews();
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     final theme = Provider.of<ThemeNotifier>(context);
+    final news = Provider.of<NewsNotifier>(context).news;
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
@@ -45,7 +34,7 @@ class _HomePageState extends State<HomePage> {
           centerTitle: true,
           actions: [
             IconButton(
-                splashRadius: 25.0,
+                //splashRadius: 25.0,
                 icon: theme.myTheme == MyTheme.Light
                     ? Icon(
                         Icons.wb_sunny,
@@ -71,7 +60,7 @@ class _HomePageState extends State<HomePage> {
                   ),
                 ),
               ),
-              _loading
+              news.isEmpty
                   ? SingleChildScrollView(
                       child: Column(
                         children: [
@@ -123,16 +112,16 @@ class _HomePageState extends State<HomePage> {
                   : Container(
                       margin: EdgeInsets.only(top: 16),
                       child: ListView.builder(
-                          itemCount: newslist.length,
+                          itemCount: news.length,
                           shrinkWrap: true,
                           physics: ClampingScrollPhysics(),
                           itemBuilder: (context, index) {
                             return NewsTile(
-                              imgUrl: newslist[index].urlToImage ?? "",
-                              title: newslist[index].title ?? "",
-                              desc: newslist[index].description ?? "",
-                              content: newslist[index].content ?? "",
-                              posturl: newslist[index].articleUrl ?? "",
+                              imgUrl: news[index].urlToImage ?? "",
+                              title: news[index].title ?? "",
+                              desc: news[index].description ?? "",
+                              content: news[index].content ?? "",
+                              posturl: news[index].articleUrl ?? "",
                             );
                           }),
                     ),

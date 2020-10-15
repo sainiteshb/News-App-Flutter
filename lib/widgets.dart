@@ -46,7 +46,7 @@ Widget appBar(Function onPressed) {
   return AppBar(
     elevation: 0.0,
     leading: IconButton(
-      splashRadius: 20.0,
+      //splashRadius: 20.0,
       onPressed: onPressed,
       icon: Icon(
         Icons.arrow_back,

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:news_app/services/news.dart';
 import 'package:news_app/views/Homepage.dart';
 import 'package:provider/provider.dart';
 import 'services/theme.dart';
@@ -6,6 +7,7 @@ import 'services/theme.dart';
 void main() {
   runApp(MultiProvider(providers: [
     ChangeNotifierProvider(create: (_) => ThemeNotifier()),
+    ChangeNotifierProvider(create: (_) => NewsNotifier()),
   ], child: MyApp()));
 }
 

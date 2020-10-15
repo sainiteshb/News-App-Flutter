@@ -10,12 +10,12 @@ import 'package:http/http.dart' as http;
 // Change the apiKey to get more Api calls since its been in use .
 String apiKey = "2c3e1343e7234f6b99576d22605f5be2";
 
-class News {
+class NewsNotifier extends ChangeNotifier {
   List<Article> news = [];
 
   Future<void> getNews() async {
     String url =
-        "http://newsapi.org/v2/top-headlines?country=us&category=business&apiKey=${apiKey}";
+        "http://newsapi.org/v2/top-headlines?country=us&category=business&apiKey=$apiKey";
 
     var response = await http.get(url);
 
@@ -36,6 +36,7 @@ class News {
           news.add(article);
         }
       });
+      notifyListeners();
     }
   }
 }
