@@ -1,3 +1,4 @@
+
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -13,17 +14,17 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  News news;
 
   @override
   void initState() {
-    Provider.of<NewsNotifier>(context).getNews();
+    news = News();
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     final theme = Provider.of<ThemeNotifier>(context);
-    final news = Provider.of<NewsNotifier>(context).news;
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
@@ -35,7 +36,7 @@ class _HomePageState extends State<HomePage> {
           centerTitle: true,
           actions: [
             IconButton(
-                //splashRadius: 25.0,
+                splashRadius: 25.0,
                 icon: theme.myTheme == MyTheme.Light
                     ? Icon(
                         Icons.wb_sunny,
@@ -61,75 +62,87 @@ class _HomePageState extends State<HomePage> {
                   ),
                 ),
               ),
-              news.isEmpty
-                  ? SingleChildScrollView(
-                      child: Column(
-                        children: [
-                          Container(
-                            width: MediaQuery.of(context).size.width,
-                            padding: EdgeInsets.symmetric(
-                                vertical: 10.0, horizontal: 10.0),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                shimmerWidget(
-                                    200.0, MediaQuery.of(context).size.width),
-                                SizedBox(
-                                  height: 8.0,
-                                ),
-                                shimmerLine(MediaQuery.of(context).size.width),
-                                SizedBox(
-                                  height: 10.0,
-                                ),
-                                shimmerLine(
-                                    MediaQuery.of(context).size.width * 0.5)
-                              ],
-                            ),
-                          ),
-                          Container(
-                            width: MediaQuery.of(context).size.width,
-                            padding: EdgeInsets.symmetric(
-                                vertical: 10.0, horizontal: 10.0),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                shimmerWidget(
-                                    200.0, MediaQuery.of(context).size.width),
-                                SizedBox(
-                                  height: 8.0,
-                                ),
-                                shimmerLine(MediaQuery.of(context).size.width),
-                                SizedBox(
-                                  height: 10.0,
-                                ),
-                                shimmerLine(
-                                    MediaQuery.of(context).size.width * 0.5)
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
-                    )
-                  : Container(
+              FutureBuilder(
+                future: news.getNews(),
+                builder: (context, snapshot) {
+                  if (snapshot.hasData) {
+                    final newslist = snapshot.data;
+                    return Container(
                       margin: EdgeInsets.only(top: 16),
                       child: ListView.builder(
-                          itemCount: news.length,
+                          itemCount: newslist.length,
                           shrinkWrap: true,
                           physics: ClampingScrollPhysics(),
                           itemBuilder: (context, index) {
                             return FadeIn(
-                              child:NewsTile(
-                              imgUrl: news[index].urlToImage ?? "",
-                              title: news[index].title ?? "",
-                              desc: news[index].description ?? "",
-                              content: news[index].content ?? "",
-                              posturl: news[index].articleUrl ?? "",
-                            ),
-                            duration: Duration(milliseconds: 250),
-                            curve: Curves.easeIn
-                          );
-                        }),
+                                child: NewsTile(
+                                  imgUrl: newslist[index].urlToImage ?? "",
+                                  title: newslist[index].title ?? "",
+                                  desc: newslist[index].description ?? "",
+                                  content: newslist[index].content ?? "",
+                                  posturl: newslist[index].articleUrl ?? "",
+                                ),
+                                duration: Duration(milliseconds: 250),
+                                curve: Curves.easeIn);
+                          }),
+                    );
+                  } else if (snapshot.hasError) {
+                    return Center(
+                      child: Text("There was some error"),
+                    );
+                  }
+                  // Loading
+                  return SingleChildScrollView(
+                    child: Column(
+                      children: [
+                        Container(
+                          width: MediaQuery.of(context).size.width,
+                          padding: EdgeInsets.symmetric(
+                              vertical: 10.0, horizontal: 10.0),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              shimmerWidget(
+                                  200.0, MediaQuery.of(context).size.width),
+                              SizedBox(
+                                height: 8.0,
+                              ),
+                              shimmerLine(MediaQuery.of(context).size.width),
+                              SizedBox(
+                                height: 10.0,
+                              ),
+                              shimmerLine(
+                                  MediaQuery.of(context).size.width * 0.5)
+                            ],
+                          ),
+                        ),
+                        Container(
+                          width: MediaQuery.of(context).size.width,
+                          padding: EdgeInsets.symmetric(
+                              vertical: 10.0, horizontal: 10.0),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              shimmerWidget(
+                                  200.0, MediaQuery.of(context).size.width),
+                              SizedBox(
+                                height: 8.0,
+                              ),
+                              shimmerLine(MediaQuery.of(context).size.width),
+                              SizedBox(
+                                height: 10.0,
+                              ),
+                              shimmerLine(
+                                  MediaQuery.of(context).size.width * 0.5)
+                            ],
+                          ),
+                        ),
+                      ],
                     ),
+                  );
+                },
+              ),
+
             ],
           ),
         ),
