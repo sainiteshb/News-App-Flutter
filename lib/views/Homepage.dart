@@ -7,18 +7,7 @@ import '../services/theme.dart';
 import '../services/news.dart';
 import 'package:flutter_fadein/flutter_fadein.dart';
 
-class HomePage extends StatefulWidget {
-  @override
-  _HomePageState createState() => _HomePageState();
-}
-
-class _HomePageState extends State<HomePage> {
-
-  @override
-  void initState() {
-    Provider.of<NewsNotifier>(context).getNews();
-    super.initState();
-  }
+class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {

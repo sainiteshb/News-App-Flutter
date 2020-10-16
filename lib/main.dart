@@ -7,7 +7,7 @@ import 'services/theme.dart';
 void main() {
   runApp(MultiProvider(providers: [
     ChangeNotifierProvider(create: (_) => ThemeNotifier()),
-    ChangeNotifierProvider(create: (_) => NewsNotifier()),
+    ChangeNotifierProvider(create: (_) => NewsNotifier()..getNews()),
   ], child: MyApp()));
 }
 
