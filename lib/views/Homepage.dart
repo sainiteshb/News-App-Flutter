@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:news_app/views/about.dart';
 import 'package:news_app/widgets.dart';
 import 'package:provider/provider.dart';
 import '../services/theme.dart';
@@ -11,18 +12,33 @@ import 'package:flutter_fadein/flutter_fadein.dart';
 class HomePage extends StatelessWidget {
  
   @override
+  
   Widget build(BuildContext context) {
     final theme = Provider.of<ThemeNotifier>(context);
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
           elevation: 0.0,
-          title: Text('Trends',
+       
+          centerTitle: true,
+          actions: <Widget>[
+            //about app page feature
+             IconButton(
+                  icon: Icon(Icons.info),
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => AboutAppPage()),
+                    );
+                  }),
+                  Spacer(),
+
+                  Text('Trends',
               style: GoogleFonts.montserrat(
                 textStyle: TextStyle(color: Colors.red, fontSize: 30.0),
               )),
-          centerTitle: true,
-          actions: [
+                  Spacer(),
+
             IconButton(
                 splashRadius: 25.0,
                 icon: theme.myTheme == MyTheme.Light
@@ -51,7 +67,7 @@ class HomePage extends StatelessWidget {
                 ),
               ),
               FutureBuilder(
-                future: news.getNews(),
+                // future: getNews(),
                 builder: (context, snapshot) {
                   if (snapshot.hasData) {
                     final newslist = snapshot.data;

@@ -9,7 +9,7 @@
 .history
 .svn/
 
-# IntelliJ related
+# IntelliJ relate
 *.iml
 *.ipr
 *.iws
