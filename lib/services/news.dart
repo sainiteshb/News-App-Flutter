@@ -78,51 +78,49 @@ class NewsTile extends StatelessWidget {
                       postUrl: posturl,
                     )));
       },
-      child: Container(
-          margin: EdgeInsets.only(bottom: 24),
-          width: MediaQuery.of(context).size.width,
-          child: Container(
-            child: Container(
-              padding: EdgeInsets.symmetric(horizontal: 16),
-              alignment: Alignment.bottomCenter,
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.only(
-                      bottomRight: Radius.circular(6),
-                      bottomLeft: Radius.circular(6))),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisSize: MainAxisSize.min,
-                children: <Widget>[
-                  ClipRRect(
-                      borderRadius: BorderRadius.circular(6),
-                      child: CachedNetworkImage(
-                        imageUrl: imgUrl,
-                        height: 180,
-                        width: MediaQuery.of(context).size.width,
-                        fit: BoxFit.cover,
-                      )),
-                  SizedBox(
-                    height: 12,
-                  ),
-                  Text(
-                    title,
-                    maxLines: 2,
-                    style: GoogleFonts.poppins(
-                        textStyle: TextStyle(
-                            fontSize: 19, fontWeight: FontWeight.w500)),
-                  ),
-                  SizedBox(
-                    height: 4,
-                  ),
-                  Text(
-                    desc,
-                    maxLines: 2,
-                    style: TextStyle(fontSize: 14, color: Colors.grey),
-                  )
-                ],
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Container(
+          padding: EdgeInsets.symmetric(horizontal: 16),
+          alignment: Alignment.bottomCenter,
+          decoration: BoxDecoration(
+              borderRadius: BorderRadius.only(
+                  bottomRight: Radius.circular(6),
+                  bottomLeft: Radius.circular(6))),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisSize: MainAxisSize.min,
+            children: <Widget>[
+              ClipRRect(
+                  borderRadius: BorderRadius.circular(6),
+                  child: Image.network(
+                    imgUrl,
+                    height: 180,
+                    width: MediaQuery.of(context).size.width,
+                    fit: BoxFit.cover,
+                  )),
+              SizedBox(
+                height: 12,
               ),
-            ),
-          )),
+              Text(
+                title,
+                maxLines: 2,
+                style: GoogleFonts.poppins(
+                    textStyle:
+                        TextStyle(fontSize: 19, fontWeight: FontWeight.w500)),
+              ),
+              SizedBox(
+                height: 4,
+              ),
+              Text(
+                desc,
+                maxLines: 2,
+                style: TextStyle(fontSize: 14, color: Colors.grey),
+              )
+            ],
+          ),
+        ),
+      ),
     );
   }
 }
