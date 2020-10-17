@@ -1,6 +1,7 @@
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:share/share.dart';
+import '../shared/dictionary.dart';
 import 'Homepage.dart';
 import 'nm_box.dart';
 import 'package:flutter/services.dart';
@@ -12,42 +13,39 @@ class AboutAppPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     _launchURLFACEBOOK() async {
-      const url = 'https://www.facebook.com/kechamadavipul.uthaiah/';
-      if (await canLaunch(url)) {
-        await launch(url);
+      
+      if (await canLaunch(facebookProfile)) {
+        await launch(facebookProfile);
       } else {
-        throw 'Could not launch $url';
+        throw 'Could not launch $facebookProfile';
       }
     }
 
     _launchTwitter() async {
-      const url = 'https://twitter.com/UthaiahVipul';
+      
 
-      if (await canLaunch(url)) {
-        await launch(url);
+      if (await canLaunch(twitterProfile)) {
+        await launch(twitterProfile);
       } else {
-        throw 'Could not launch $url';
+        throw 'Could not launch $twitterProfile';
       }
     }
 
     _lanchInsta() async {
-      const url = 'https://www.instagram.com//vipuluthaiah/';
-
-      if (await canLaunch(url)) {
-        await launch(url);
+      
+      if (await canLaunch(instagramProfile)) {
+        await launch(instagramProfile);
       } else {
-        throw 'Could not launch $url';
+        throw 'Could not launch $instagramProfile';
       }
     }
 
     _lanchemail() async {
-      const url =
-          'mailto:drealtic.com@gmail.com?subject=Support mail=Hi,If you are facing any problem u can reach us out just write u r issue';
-
-      if (await canLaunch(url)) {
-        await launch(url);
+      
+      if (await canLaunch(emailPrfile)) {
+        await launch(emailPrfile);
       } else {
-        throw 'Could not launch $url';
+        throw 'Could not launch $emailPrfile';
       }
     }
 

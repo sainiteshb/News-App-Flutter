@@ -3,13 +3,13 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:hive/hive.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import '../shared/dictionary.dart';
 import '../views/news_article_page.dart';
 import 'news_model.dart';
 import 'package:http/http.dart' as http;
 
 
 // Change the apiKey to get more Api calls since its been in use .
-const String apiKey = "2c3e1343e7234f6b99576d22605f5be2";
 
 class NewsNotifier extends ChangeNotifier {
   final Box box;
@@ -44,7 +44,7 @@ class NewsNotifier extends ChangeNotifier {
       notifyListeners();
     }
     final url =
-        "http://newsapi.org/v2/top-headlines?country=us&category=business&apiKey=$apiKey";
+        "$newsUrl$apiKey";
     try {
       final response = await http.get(url);
       final jsonData = jsonDecode(response.body);
