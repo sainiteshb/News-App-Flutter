@@ -8,36 +8,32 @@ import '../services/theme.dart';
 import '../services/news.dart';
 import 'package:flutter_fadein/flutter_fadein.dart';
 
-
 class HomePage extends StatelessWidget {
- 
   @override
-  
   Widget build(BuildContext context) {
     final theme = Provider.of<ThemeNotifier>(context);
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
           elevation: 0.0,
-       
           centerTitle: true,
           actions: <Widget>[
             //about app page feature
-             IconButton(
-                  icon: Icon(Icons.info),
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => AboutAppPage()),
-                    );
-                  }),
-                  Spacer(),
+            IconButton(
+                icon: Icon(Icons.info),
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => AboutAppPage()),
+                  );
+                }),
+            Spacer(),
 
-                  Text('Trends',
-              style: GoogleFonts.montserrat(
-                textStyle: TextStyle(color: Colors.red, fontSize: 30.0),
-              )),
-                  Spacer(),
+            Text('Trends',
+                style: GoogleFonts.montserrat(
+                  textStyle: TextStyle(color: Colors.red, fontSize: 30.0),
+                )),
+            Spacer(),
 
             IconButton(
                 splashRadius: 25.0,
@@ -67,7 +63,7 @@ class HomePage extends StatelessWidget {
                 ),
               ),
               FutureBuilder(
-                // future: getNews(),
+                future: NewsNotifier().getNews(),
                 builder: (context, snapshot) {
                   if (snapshot.hasData) {
                     final newslist = snapshot.data;
@@ -146,7 +142,6 @@ class HomePage extends StatelessWidget {
                   );
                 },
               ),
-
             ],
           ),
         ),
