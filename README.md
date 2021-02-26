@@ -1,5 +1,5 @@
 # News-App-flutter
- News Apps which shows the trending news headlines using the NewsAPI . You can send a PR and get your progress in the hacktoberfest .🤞
+ News Apps which shows the trending news headlines using the NewsAPI . 
 
 
 # Screenshot
@@ -38,5 +38,4 @@ Some ideas to contribute
 Or anything , Your choice .<br>
 Note: No typo fixes please !
 
-Happy Hacktoberfest !😉
-Added More Features
+
